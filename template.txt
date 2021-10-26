@@ -1,0 +1,24 @@
+import javax.microedition.midlet.*;
+import javax.microedition.lcdui.*;
+
+public class CLASS_NAME extends MIDlet implements CommandListener{
+	public Display display;
+
+	public CLASS_NAME(){
+		display=Display.getDisplay(this);
+
+	}
+	public startApp(){
+		display.setCurrent();
+	}
+	public void pauseApp(){
+
+	}
+	public void destroyApp(boolean unconditional){
+		notifyDestroyed();
+	}
+
+	public void commandAction(Command c,Displayable d){
+		
+	}
+}
