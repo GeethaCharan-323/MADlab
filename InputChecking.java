@@ -53,8 +53,9 @@ public class InputChecking extends MIDlet implements CommandListener{
 				areaCode+=s.charAt(i);
 			}
 		}
-		boolean areaFlag=false,countFlag=false;
-		if(areaCode=="111"||areaCode=="041"||areaCode=="050"||areaCode=="0400"||areaCode=="044"){
+		boolean areaFlag=false;
+		boolean countFlag=false;
+		if(areaCode.equals("111")||areaCode.equals("041")||areaCode.equals("050")||areaCode.equals("0400")||areaCode.equals("044")){
 			areaFlag=true;
 		}
 		int count=0;
@@ -65,17 +66,15 @@ public class InputChecking extends MIDlet implements CommandListener{
 			countFlag=true;
 		}
 
-			//alerts
-		String alertMessage="";
-		if(areaFlag==false){
-			alertMessage="AreaCode Error, ";
-		}
-		if(countFlag==false){
-			alertMessage+="Number Count Error, ";
-		}
+		//alerts
+		String alertMessage;
 		if(countFlag&&areaFlag){
-			alertMessage="Number is Correct";
+			alertMessage="Valid Number";
 		}
+		else{
+			alertMessage="Invalid Number";	
+		}
+		
 		Alert alert = new Alert("ALERT",alertMessage,null,null);
 		display.setCurrent(alert);
 	}
