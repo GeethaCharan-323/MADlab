@@ -8,6 +8,7 @@ public class Quiz extends MIDlet implements CommandListener{
 	public Command next,back,submit,exit;
 	public List l1,l2,l3,l4,l5;
 	public int count=0;
+	public StringItem si;
 
 	public Quiz(){
 		display=Display.getDisplay(this);
@@ -18,7 +19,7 @@ public class Quiz extends MIDlet implements CommandListener{
 		submit=new Command("SUBMIT",Command.OK,1);
 		exit=new Command("EXIT",Command.EXIT,1);
 
-		l1=new List("Menu Items", Choice.IMPLICIT);
+		l1=new List("Question 1", Choice.IMPLICIT);
 		l1.append("Item1", null);
       	l1.append("Item2", null);
       	l1.append("Item3", null);
@@ -26,7 +27,7 @@ public class Quiz extends MIDlet implements CommandListener{
       	l1.addCommand(next);
       	l1.setCommandListener(this);
 
-      	l2=new List("Menu Items", Choice.IMPLICIT);
+      	l2=new List("Question 2", Choice.IMPLICIT);
 		l2.append("Item1", null);
       	l2.append("Item2", null);
       	l2.append("Item3", null);
@@ -34,7 +35,7 @@ public class Quiz extends MIDlet implements CommandListener{
       	l2.addCommand(next);
       	l2.setCommandListener(this);
 
-      	l3=new List("Menu Items", Choice.IMPLICIT);
+      	l3=new List("Question 3", Choice.IMPLICIT);
 		l3.append("Item1", null);
       	l3.append("Item2", null);
       	l3.append("Item3", null);
@@ -109,10 +110,17 @@ public class Quiz extends MIDlet implements CommandListener{
 			if(l3.getSelectedIndex()==3) count++;
 			displayScore();
 		}
+		if(c==exit){
+			destroyApp(false);
+		}
 		
 	}
 	public void displayScore(){
-		String alertMessage="Your Score is "+count;
-		Alert alert = new Alert("ALERT",alertMessage,null,null);
+		res = new Form("RESULT");
+		si = new StringItem("Your Score is",String.valueOf(count));
+		res.append(si);
+		res.addCommand(exit);
+		res.setCommandListener(this);
+		display.setCurrent(res);
 	}
 }
