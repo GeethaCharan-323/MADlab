@@ -11,6 +11,9 @@ public class Quiz extends MIDlet implements CommandListener{
 	public StringItem si;
 
 	public Quiz(){
+		super();
+	}
+	public void startApp(){
 		display=Display.getDisplay(this);
 		
 		//commands
@@ -19,69 +22,30 @@ public class Quiz extends MIDlet implements CommandListener{
 		submit=new Command("SUBMIT",Command.OK,1);
 		exit=new Command("EXIT",Command.EXIT,1);
 
-		l1=new List("Question 1", Choice.IMPLICIT);
-		l1.append("Item1", null);
-      	l1.append("Item2", null);
-      	l1.append("Item3", null);
-      	l1.append("Item4", null);
+		l1=new List("TCP Maximum Header Length?", Choice.IMPLICIT);
+		l1.append("10B", null);
+      	l1.append("20B", null);
+      	l1.append("40B", null);
+      	l1.append("60B", null); //index 3 (60B) is answer
       	l1.addCommand(next);
       	l1.setCommandListener(this);
 
-      	l2=new List("Question 2", Choice.IMPLICIT);
-		l2.append("Item1", null);
-      	l2.append("Item2", null);
-      	l2.append("Item3", null);
-      	l2.append("Item4", null);
+      	l2=new List("C programming language is", Choice.IMPLICIT);
+		l2.append("Regular Language", null);
+      	l2.append("CFL", null);
+      	l2.append("CSL", null);
+      	l2.append("Recursive", null); //index 2 (CSL) is answer
       	l2.addCommand(next);
       	l2.setCommandListener(this);
 
-      	l3=new List("Question 3", Choice.IMPLICIT);
-		l3.append("Item1", null);
-      	l3.append("Item2", null);
-      	l3.append("Item3", null);
-      	l3.append("Item4", null);
+      	l3=new List("SMTP Port No ?", Choice.IMPLICIT);
+		l3.append("23", null);
+      	l3.append("80", null);
+      	l3.append("111", null);
+      	l3.append("25", null);   //index 3(25) is answer
       	l3.addCommand(submit);
       	l3.setCommandListener(this);
 
-			/*
-		//Question 1
-		q1=new Form("TCP Maximum Header Length?");
-		c1=new ChoiceGroup("",Choice.IMPLICIT);
-		c1.append("10B",null);
-		c1.append("20B",null);
-		c1.append("40B",null);
-		c1.append("60B",null);
-		q1.append(c1);
-		q1.addCommand(next);
-		q1.setCommandListener(this);
-
-		//Question 2
-		q2=new Form("C programming language is");
-		c2=new ChoiceGroup("",Choice.EXCLUSIVE);
-		c2.append("Regular Language",null);
-		c2.append("CFL",null);
-		c2.append("CSL",null);
-		c2.append("Recursive",null);
-		q2.append(c2);
-		q2.addCommand(back);
-		q2.addCommand(next);
-		q2.setCommandListener(this);
-
-		//Question 3
-		q3=new Form("SMTP Port No ?");
-		c3=new ChoiceGroup("",Choice.EXCLUSIVE);
-		c3.append("23",null);
-		c3.append("80",null);
-		c3.append("110",null);
-		c3.append("25",null);
-		q3.append(c3);
-		q3.addCommand(back);
-		q3.addCommand(submit);
-		q3.setCommandListener(this);
-
-		*/
-	}
-	public void startApp(){
 		display.setCurrent(l1);
 	}
 	public void pauseApp(){
@@ -94,7 +58,7 @@ public class Quiz extends MIDlet implements CommandListener{
 	public void commandAction(Command c,Displayable d){
 		if(c==next){
 			if(d==l1){
-				if(l1.getSelectedIndex()==1) count++;
+				if(l1.getSelectedIndex()==3) count++; //indexing starts from 0
 				display.setCurrent(l2);
 			}
 			else if(d==l2){
@@ -102,13 +66,13 @@ public class Quiz extends MIDlet implements CommandListener{
 				display.setCurrent(l3);
 			}
 		}
-		if(c==back){
-			if(d==q2) display.setCurrent(q1);
-			else if(d==q3) display.setCurrent(q2);
-		}
 		if(c==submit){
 			if(l3.getSelectedIndex()==3) count++;
 			displayScore();
+		}
+		if(c==back){
+			if(d==l2) display.setCurrent(l1);
+			else if(d==l3) display.setCurrent(l2);
 		}
 		if(c==exit){
 			destroyApp(false);
