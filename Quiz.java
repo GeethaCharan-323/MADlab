@@ -3,10 +3,9 @@ import javax.microedition.lcdui.*;
 
 public class Quiz extends MIDlet implements CommandListener{
 	public Display display;
-	public Form q1,q2,q3,q4,q5,res;
-	public ChoiceGroup c1,c2,c3,c4,c5;
-	public Command next,back,submit,exit;
-	public List l1,l2,l3,l4,l5;
+	public Command next,submit,exit;
+	public List l1,l2,l3;
+	public Form res;
 	public int count=0;
 	public StringItem si;
 
@@ -18,7 +17,6 @@ public class Quiz extends MIDlet implements CommandListener{
 		
 		//commands
 		next=new Command("NEXT",Command.OK,1);
-		back=new Command("BACK",Command.BACK,1);
 		submit=new Command("SUBMIT",Command.OK,1);
 		exit=new Command("EXIT",Command.EXIT,1);
 
@@ -69,10 +67,6 @@ public class Quiz extends MIDlet implements CommandListener{
 		if(c==submit){
 			if(l3.getSelectedIndex()==3) count++;
 			displayScore();
-		}
-		if(c==back){
-			if(d==l2) display.setCurrent(l1);
-			else if(d==l3) display.setCurrent(l2);
 		}
 		if(c==exit){
 			destroyApp(false);
