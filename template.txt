@@ -5,10 +5,13 @@ public class CLASS_NAME extends MIDlet implements CommandListener{
 	public Display display;
 
 	public CLASS_NAME(){
-		display=Display.getDisplay(this);
-
+		super();
 	}
-	public startApp(){
+	public void startApp(){
+		display=Display.getDisplay(this);
+		
+		
+		
 		display.setCurrent();
 	}
 	public void pauseApp(){
